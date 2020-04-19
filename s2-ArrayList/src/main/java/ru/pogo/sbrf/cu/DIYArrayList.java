@@ -15,12 +15,12 @@ public class DIYArrayList<T> implements List<T> {
 
     @Override
     public int size() {
-        return this.size;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return this.data == EMPTY_ARRAY;
+        return size == 0;
     }
 
     @Override
