@@ -12,6 +12,13 @@
     <artifactId>s2-ArrayList</artifactId>
 
     <name>s2-ArrayList</name>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+            <version>5.4.2</version>
+        </dependency>
+    </dependencies>
 
 </project>
