@@ -1,0 +1,62 @@
+﻿-Xms512m
+-Xmx512m
+-Xlog:gc=debug:file=./logs/gc-%p-%t.log:tags,uptime,time,level:filecount=5,filesize=10m
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=./logs/dump
+-XX:+UseG1GC
+
+G1 time:388
+SerialGC time:411
+
+-Xms512m
+-Xmx512m
+-Xlog:gc=debug:file=./logs/gc-%p-%t.log:tags,uptime,time,level:filecount=5,filesize=10m
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=./logs/dump
+-XX:+UseG1GC
+-XX:MaxGCPauseMillis=100000
+
+G1 time:404
+SerialGC time:420
+
+-Xms512m
+-Xmx512m
+-Xlog:gc=debug:file=./logs/gc-%p-%t.log:tags,uptime,time,level:filecount=5,filesize=10m
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=./logs/dump
+-XX:+UseG1GC
+-XX:MaxGCPauseMillis=10
+
+G1 time:388
+SerialGC time:406
+
+-Xms2048m
+-Xmx2048m
+-Xlog:gc=debug:file=./logs/gc-%p-%t.log:tags,uptime,time,level:filecount=5,filesize=10m
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=./logs/dump
+-XX:+UseG1GC
+
+G1 time:400
+SerialGC time:399
+
+-Xms5120m
+-Xmx5120m
+-Xlog:gc=debug:file=./logs/gc-%p-%t.log:tags,uptime,time,level:filecount=5,filesize=10m
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=./logs/dump
+-XX:+UseG1GC
+
+G1 time:379
+SerialGC time:393
+
+Выводы:
+1) На базовом запуске работа GC  сильно отличается. Из графика и логов видно, что по Serial более глубокая зачистка проходит примерно через равные промежутки временив отличии от G1.
+По времени лучше отрабатывает Serial (388 \ 411)
+2) При большой паузе для GC оба сборщика пропорционально ухудшили показатели (404\420)
+3) При небольшой паузе для GC оба сборщика пропорционально улучшили свои показатели (388\406)
+По всей видимости, память не так сильно засорялась и сборщик мусора успевал за более короткое время чистить память.
+4)Увеличение памяти улучшило показатели. На 2048 оба сборщика отработали одинаково. Serial отработал лучше ( допускаю погрешность).
+5) На 5120  на G1 произошло серьезное ускорение работы, в то время как Serial не сильно улучшил сои показатели. (379\393)
+
+В целом, G1 отработал быстрее на всех настройках VM.
