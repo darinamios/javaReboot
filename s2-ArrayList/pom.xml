@@ -9,8 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>s1-HelloWorld</artifactId>
+    <artifactId>s2-ArrayList</artifactId>
 
-    <name>s1-HelloWorld</name>
+    <name>s2-ArrayList</name>
+
 
 </project>
