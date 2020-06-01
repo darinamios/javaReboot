@@ -1,5 +1,7 @@
 package ru.pogo.sbrf.cu;
 
+import ru.pogo.sbrf.cu.atm.ATMImpl;
+
 import java.util.ArrayList;
 
 /**
@@ -10,7 +12,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        ATM atm = new ATM();
+        ATMImpl atm = new ATMImpl();
         var moneyToSet = new ArrayList<Integer>();
         moneyToSet.add(100);
         moneyToSet.add(100);
@@ -18,7 +20,7 @@ public class App
         moneyToSet.add(50);
         moneyToSet.add(50);
 
-        atm.loadMoney(moneyToSet);
+       // atm.loadMoney(moneyToSet);
         atm.getTotalSum();
 
         try{
@@ -29,6 +31,6 @@ public class App
         } catch (Exception e){
             System.out.println("Not enough money");
         }
-        atm.getAtmInfo();
+        //atm.getAtmInfo();
     }
 }
