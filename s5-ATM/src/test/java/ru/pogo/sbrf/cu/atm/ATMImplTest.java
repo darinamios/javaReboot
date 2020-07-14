@@ -28,8 +28,8 @@ class ATMImplTest {
         atmReceive = new ATMImpl();
         atmDeposite = new ATMImpl();
         testLoadPack = new ArrayList<>();
-        testLoadPack.add(Nominal.ONE_NUND);
-        testLoadPack.add(Nominal.ONE_NUND);
+        testLoadPack.add(Nominal.ONE_HUND);
+        testLoadPack.add(Nominal.ONE_HUND);
         testLoadPack.add(Nominal.TWO_THOUS);
         var testReceivePack = new ArrayList<Nominal>();
         testReceivePack.add(Nominal.FIVE_HUND);
@@ -59,7 +59,7 @@ class ATMImplTest {
         atmDeposite.loadMoney(testLoadPack);
         var res = atmDeposite.getBalance();
         for (var cell : res){
-            if (cell.getNominal() == Nominal.ONE_NUND){
+            if (cell.getNominal() == Nominal.ONE_HUND){
                 assertEquals(2, cell.getCount());
             }else if(cell.getNominal() == Nominal.TWO_THOUS){
                 assertEquals(1, cell.getCount());

@@ -1,5 +1,7 @@
 package ru.pogo.sbrf.cu.atm;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.pogo.sbrf.cu.Collector;
 import ru.pogo.sbrf.cu.Depositing;
 import ru.pogo.sbrf.cu.Receiving;
@@ -10,14 +12,33 @@ import ru.pogo.sbrf.cu.exceptions.IncorrectValue;
 import ru.pogo.sbrf.cu.exceptions.NoSuchNominal;
 import ru.pogo.sbrf.cu.exceptions.NotAvailableRequestCount;
 import ru.pogo.sbrf.cu.ref.Nominal;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class ATMImpl implements Collector, Depositing, Receiving {
+    private static Logger logger = LoggerFactory.getLogger(ATMImpl.class);
+
     private List<Cassette> cassettes;
     private Integer totalSum;
 
+   /* @JsonCreator
+    public ATMImpl(@JsonProperty("age") int age, @JsonProperty("nameForSerialization") String name) {
+        System.out.println("JsonCreator makes object...");
+        this.age = age;
+        this.name = name;
+    }*/
+   @JsonCreator
+   public ATMImpl(@JsonProperty("balance")  List<Cassette> balance, @JsonProperty("totalSum") Integer totalSum) {
+       System.out.println("JsonCreator makes object...");
+       cassettes = new ArrayList<>();
+       for (var nominal : balance)
+           cassettes.add(new CassetteImpl(nominal.getNominal(), nominal.count()));
+       this.totalSum = totalSum;
+   }
     public ATMImpl(){
         cassettes = new ArrayList<>();
        for (var nominal : Nominal.values())
@@ -50,6 +71,7 @@ public class ATMImpl implements Collector, Depositing, Receiving {
             }
         }
         totalSum += sum;
+        logger.info("load money sum:{}", sum);
         return sum;
     }
 
@@ -79,6 +101,7 @@ public class ATMImpl implements Collector, Depositing, Receiving {
             loadMoney(result);
             throw new NoSuchNominal();
         }
+        logger.info("receive money sum:{}", sum);
         return result;
     }
 

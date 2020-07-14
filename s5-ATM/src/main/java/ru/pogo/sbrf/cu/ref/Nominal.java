@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public enum Nominal {
-    ONE_NUND(100)
+    ONE_HUND(100)
     ,TWO_HUND(200)
     ,FIVE_HUND(500)
     ,ONE_THOUS(1000)

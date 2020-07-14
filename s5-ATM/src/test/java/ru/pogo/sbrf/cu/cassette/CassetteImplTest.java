@@ -14,7 +14,7 @@ class CassetteImplTest {
 
     @BeforeEach
     public void prepareCassette(){
-       cassette = new CassetteImpl(Nominal.ONE_NUND);
+       cassette = new CassetteImpl(Nominal.ONE_HUND);
        cassette.add(5);
     }
 
