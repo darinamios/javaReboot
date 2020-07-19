@@ -1,7 +1,7 @@
-package ru.pogo.sbrf.cu.cassette;
+package ru.pogo.sbrf.cu.models;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import ru.pogo.sbrf.cu.models.CassetteImpl;
 import ru.pogo.sbrf.cu.ref.Nominal;
 
 @JsonDeserialize(as = CassetteImpl.class)
@@ -10,4 +10,5 @@ public interface Cassette {
     void extract(int count);
     int count();
     Nominal getNominal();
+    void setATM(ATM atm);
 }

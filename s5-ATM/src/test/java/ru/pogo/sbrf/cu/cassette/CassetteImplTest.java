@@ -3,8 +3,10 @@ package ru.pogo.sbrf.cu.cassette;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import ru.pogo.sbrf.cu.models.Cassette;
 import ru.pogo.sbrf.cu.exceptions.IncorrectValue;
 import ru.pogo.sbrf.cu.exceptions.NotAvailableRequestCount;
+import ru.pogo.sbrf.cu.models.CassetteImpl;
 import ru.pogo.sbrf.cu.ref.Nominal;
 
 import static org.junit.jupiter.api.Assertions.*;

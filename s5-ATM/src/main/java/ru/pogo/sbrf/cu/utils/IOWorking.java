@@ -1,7 +1,7 @@
 package ru.pogo.sbrf.cu.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ru.pogo.sbrf.cu.atm.ATMImpl;
+import ru.pogo.sbrf.cu.models.ATMImpl;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,36 +1,34 @@
-package ru.pogo.sbrf.cu.atm;
+package ru.pogo.sbrf.cu.models;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.pogo.sbrf.cu.Collector;
-import ru.pogo.sbrf.cu.Depositing;
-import ru.pogo.sbrf.cu.Receiving;
-import ru.pogo.sbrf.cu.cassette.Cassette;
-import ru.pogo.sbrf.cu.cassette.CassetteImpl;
-import ru.pogo.sbrf.cu.dto.CashPair;
 import ru.pogo.sbrf.cu.exceptions.IncorrectValue;
 import ru.pogo.sbrf.cu.exceptions.NoSuchNominal;
 import ru.pogo.sbrf.cu.exceptions.NotAvailableRequestCount;
 import ru.pogo.sbrf.cu.ref.Nominal;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
-public class ATMImpl implements Collector, Depositing, Receiving {
+@Entity
+@Table(name = "atm")
+public class ATMImpl implements ATM {
     private static Logger logger = LoggerFactory.getLogger(ATMImpl.class);
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private long id;
+
+    @OneToMany(targetEntity = CassetteImpl.class, mappedBy = "atm", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    //@JoinColumn(name="atm_id")
     private List<Cassette> cassettes;
+
+    @Column(name = "total")
     private Integer totalSum;
 
-   /* @JsonCreator
-    public ATMImpl(@JsonProperty("age") int age, @JsonProperty("nameForSerialization") String name) {
-        System.out.println("JsonCreator makes object...");
-        this.age = age;
-        this.name = name;
-    }*/
    @JsonCreator
    public ATMImpl(@JsonProperty("balance")  List<Cassette> balance, @JsonProperty("totalSum") Integer totalSum) {
        System.out.println("JsonCreator makes object...");
@@ -40,22 +38,13 @@ public class ATMImpl implements Collector, Depositing, Receiving {
        this.totalSum = totalSum;
    }
     public ATMImpl(){
-        cassettes = new ArrayList<>();
-       for (var nominal : Nominal.values())
-           cassettes.add(new CassetteImpl(nominal));
-        totalSum = 0;
+       setCassettes(getDefaultCassettes());
+       totalSum = 0;
     }
 
     @Override
     public Integer getTotalSum() {
         return totalSum;
-    }
-
-    @Override
-    public List<CashPair> getBalance(){
-        return  cassettes.stream()
-                .map(cassette -> new CashPair(cassette.getNominal(), cassette.count()))
-                .collect(Collectors.toList());
     }
 
     @Override
@@ -104,10 +93,38 @@ public class ATMImpl implements Collector, Depositing, Receiving {
         logger.info("receive money sum:{}", sum);
         return result;
     }
+    public Long getId() {
+        return id;
+    }
 
-  /*  private void summ(){
-        Optional<Integer> summ = cassettes.stream()
-                .map(cassette -> cassette.getNominal().getValue()*cassette.count())
-                .reduce((x1,x2)->x1+x2);
-    }*/
+    @Override
+    public List<Cassette> getCassettes() {
+        return cassettes;
+    }
+
+    @Override
+    public void setCassettes(List<Cassette> cassettes) {
+        this.cassettes = cassettes;
+    }
+
+    @Override
+    public void setTotalSum(Integer totalSum) {
+        this.totalSum = totalSum;
+    }
+
+    public List<Cassette> getDefaultCassettes(){
+        var res  = new ArrayList<Cassette>();
+        for (var nominal : Nominal.values())
+            res.add(new CassetteImpl(nominal, 0, this));
+        return res;
+    }
+
+    @Override
+    public String toString() {
+        return "ATM{" +
+                "id=" + id +
+                ", total='" + totalSum + '\'' +
+                ", cassettes=" + cassettes.size() +
+                '}';
+    }
 }
