@@ -14,6 +14,7 @@
     <module>s3-GC</module>
     <module>s4-Annotation</module>
     <module>s5-ATM</module>
+      <module>s6-AOP</module>
   </modules>
 
   <name>java_2020_03_examples</name>
