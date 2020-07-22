@@ -1,0 +1,14 @@
+server:
+  port: 8090
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, beans
+
+
+application:
+  message: "Test ru.sbrf.cu.Props msg"
+
+messager:
+  message: "Hello from ru.sbrf.cu.Messager"

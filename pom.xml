@@ -14,7 +14,11 @@
     <module>s3-GC</module>
     <module>s4-Annotation</module>
     <module>s5-ATM</module>
-      <module>s6-AOP</module>
+    <module>s6-AOP</module>
+    <module>s7-Boot/main</module>
+    <module>s7-Boot/messager</module>
+    <module>s7-Boot/messager-starter</module>
+    <module>s7-Boot/spring-start</module>
   </modules>
 
   <name>java_2020_03_examples</name>
@@ -23,6 +27,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
+    <spring-boot.version>2.2.5.RELEASE</spring-boot.version>
   </properties>
 
 
@@ -37,7 +42,35 @@
       <artifactId>junit-jupiter-engine</artifactId>
       <version>5.4.2</version>
     </dependency>
-
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.8.0-beta2</version>
+        <scope>compile</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>RELEASE</version>
+        <scope>compile</scope>
+      </dependency>
+      <!--     <dependency>
+             <groupId>org.springframework</groupId>
+             <artifactId>spring-context</artifactId>
+             <version>5.3.0-M1</version>
+             <scope>compile</scope>
+       </dependency>
+            <dependency>
+               <groupId>org.springframework</groupId>
+               <artifactId>spring-context</artifactId>
+               <version>5.3.0-M1</version>
+               <scope>compile</scope>
+             </dependen        <dependency>
+               <groupId>org.springframework.boot</groupId>
+               <artifactId>spring-boot-dependencies</artifactId>
+               <version>${spring-boot.version}</version>
+             </dependency>
+       -->
     </dependencies>
 
 
