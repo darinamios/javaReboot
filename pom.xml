@@ -19,6 +19,9 @@
     <module>s7-Boot/messager</module>
     <module>s7-Boot/messager-starter</module>
     <module>s7-Boot/spring-start</module>
+    <module>s7-BootAdvanced/bean-scopes</module>
+      <module>s7-BootAdvanced/bean-life</module>
+      <module>s7-BootAdvanced/bean-profile</module>
   </modules>
 
   <name>java_2020_03_examples</name>
