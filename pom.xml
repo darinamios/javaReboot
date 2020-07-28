@@ -22,6 +22,10 @@
     <module>s7-BootAdvanced/bean-scopes</module>
       <module>s7-BootAdvanced/bean-life</module>
       <module>s7-BootAdvanced/bean-profile</module>
+      <module>s8-ATMBoot</module>
+      <module>s9-jdbc/ex1</module>
+      <module>s9-jdbc/ex2</module>
+      <module>s9-jdbc/ex-3</module>
   </modules>
 
   <name>java_2020_03_examples</name>

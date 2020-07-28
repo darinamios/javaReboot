@@ -1,0 +1,7 @@
+logger:
+  level:
+    root: error
+
+spring:
+  jpa:
+    show-sql: true
