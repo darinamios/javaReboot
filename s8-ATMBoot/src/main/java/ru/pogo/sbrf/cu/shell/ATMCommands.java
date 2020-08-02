@@ -11,6 +11,7 @@ import org.springframework.shell.standard.ShellOption;
 import ru.pogo.sbrf.cu.models.ATM;
 import ru.pogo.sbrf.cu.models.ATMImpl;
 import ru.pogo.sbrf.cu.ref.Nominal;
+import ru.pogo.sbrf.cu.repositories.ATMRepository;
 import ru.pogo.sbrf.cu.services.ATMWork;
 import ru.pogo.sbrf.cu.services.IOWork;
 
@@ -27,6 +28,7 @@ public class ATMCommands {
     private final ATMWork atmWork;
     private static Scanner scanner = new Scanner(System.in);
     private static Logger logger = LoggerFactory.getLogger(ATMCommands.class);
+    private final ATMRepository atmRepository;
 
     @ShellMethod(value = "Load atm", key = {"load", "l"})
     public void load(@ShellOption(defaultValue = "") String path) {
@@ -38,6 +40,7 @@ public class ATMCommands {
         else {
             atm = ioWork.readFromFile(path);
         }
+        atmRepository.save(atm);
     }
     @ShellMethod(value = "Print total atm", key = {"total", "t"})
     @ShellMethodAvailability(value = "isCommandAvailable")

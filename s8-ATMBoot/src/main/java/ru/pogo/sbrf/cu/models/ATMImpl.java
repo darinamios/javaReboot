@@ -2,9 +2,7 @@ package ru.pogo.sbrf.cu.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,22 +13,29 @@ import ru.pogo.sbrf.cu.ref.Nominal;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-
-import javax.persistence.*;*/
+*/
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 @Data
-//@Entity // Указывает, что данный класс является сущностью
-//@Table(name = "students")
+@Entity
+@Table(name = "atm")
 public class ATMImpl implements ATM {
     private static Logger logger = LoggerFactory.getLogger(ATMImpl.class);
 
+    @OneToMany(targetEntity = CassetteImpl.class, mappedBy = "atm", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private final List<Cassette> cassettes;
 
+    @Column(name = "total")
     private Integer totalSum;
+
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
+    private long id;
 
    @JsonCreator
    public ATMImpl(@JsonProperty("balance")  List<Cassette> balance, @JsonProperty("totalSum") Integer totalSum) {

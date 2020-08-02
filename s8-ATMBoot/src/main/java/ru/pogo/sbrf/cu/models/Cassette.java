@@ -9,4 +9,5 @@ public interface Cassette {
     void extract(int count);
     int count();
     Nominal getNominal();
+    void setATM(ATM atm);
 }
